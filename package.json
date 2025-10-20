@@ -1,0 +1,20 @@
+{
+	"name": "example-countdown-ts-gcp",
+	"module": "index.ts",
+	"type": "module",
+	"private": true,
+	"devDependencies": {
+		"@types/bun": "latest"
+	},
+	"scripts": {
+		"build": "tsc",
+		"check": "npx @biomejs/biome check",
+		"fmt": "npx @biomejs/biome check --write"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"dependencies": {
+		"@resonatehq/gcp": "^0.1.2"
+	}
+}
