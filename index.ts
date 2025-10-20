@@ -1,7 +1,7 @@
 import { Resonate } from "@resonatehq/gcp";
 import type { Context } from "@resonatehq/sdk";
 
-const resonate = new Resonate();
+const resonate = new Resonate({ verbose: true });
 
 function* factorial(ctx: Context, n: number): Generator<any, number, any> {
 	if (n <= 1) {
