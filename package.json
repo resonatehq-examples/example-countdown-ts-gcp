@@ -1,21 +1,17 @@
 {
   "name": "example-countdown-ts-gcp",
-  "module": "index.ts",
-  "type": "module",
+  "version": "1.0.0",
+  "type": "commonjs",
   "private": true,
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
+  "main": "dist/index.js",
   "scripts": {
-    "postinstall": "tsc --build",
-    "check": "npx @biomejs/biome check",
-    "fmt": "npx @biomejs/biome check --write",
+    "build": "tsc",
     "start": "node dist/index.js"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
   },
   "dependencies": {
     "@resonatehq/gcp": "^0.1.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0"
   }
 }
