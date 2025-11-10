@@ -77,3 +77,7 @@ If everything is configured correctly, you will see notifications poping up at t
 ![ntfy logo](assets/ntfy.png)
 
 If you are still having trouble, please open an issue on the [GitHub repository](https://github.com/resonatehq-examples/example-countdown-ts-gcp/issues).
+
+## GCP Deployment
+
+TODO...
