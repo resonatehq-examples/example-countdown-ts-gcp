@@ -4,7 +4,7 @@ A Countdown powered by Resonate and Google Cloud Functions. The Countdown, sends
 
 ## How It Works
 
-This example demonstrates how a countdown can be implemented with Resonate's Distributed Async/Await using a naive for loop. On `yield ctx.sleep` the countdown function suspends, immediatelly completing the Google Cloud Function execution. After the specified sleep duration, Resonate will resume the countdown function by starting a new Google Cloud Function execution.
+This example demonstrates how a countdown can be implemented with Resonate's Distributed Async/Await using a naive for loop. On `yield ctx.sleep` the countdown function suspends, immediately completing the Google Cloud Function execution. After the specified sleep duration, Resonate will resume the countdown function by starting a new Google Cloud Function execution.
 
 ```typescript
 export function* countdown(
@@ -16,7 +16,7 @@ export function* countdown(
 	for (let i = count; i > 0; i--) {
 		// send notification to ntfy.sh
 		yield* ctx.run(notify, url, `Countdown: ${i}`);
-		// sleep results in a suspension point causing
+		// sleep creates a suspension point causing
 		// the Google Cloud Function execution to terminate
 		yield* ctx.sleep(delay * 60 * 1000);
 	}
@@ -26,7 +26,7 @@ export function* countdown(
 ```
 
 **Key Concepts:**
-- **Suspension:** Executions can be paused for given number of time via `ctx.sleep`
+- **Suspension:** Executions can be suspended for given amount of time via `ctx.sleep`
 
 ---
 
@@ -34,7 +34,7 @@ export function* countdown(
 
 ### 1. Start Resonate server
 
-You can install Resonate with [Homebrew](https://docs.resonatehq.io/operate/run-server#install-with-homebrew) or download the latest release from [Github](https://github.com/resonatehq/resonate/releases)
+You can install Resonate with [Homebrew](https://docs.resonatehq.io/operate/run-server#install-with-homebrew) or download the latest release from [Github](https://github.com/resonatehq/resonate/releases).
 
 ```
 resonate dev
@@ -71,7 +71,7 @@ Example
 resonate invoke foo.1 --func countdown --arg 5 --arg 1 --arg https://ntfy.sh/resonatehq-$RANDOM --target http://localhost:8080
 ```
 
-### 5. Visit the url printed
+### 5. Open your ntfy.sh workspace in a browser
 
 ```
 Countdown <promiseId>: https://ntfy.sh/resonatehq-<number>
@@ -85,8 +85,8 @@ Countdown foo.1: https://ntfy.sh/resonatehq-22012
 
 ## Troubleshooting
 
-If everything is configured correctly, you will see notifications poping up at the ntfy.sh workspace you set on the url
+If everything is configured correctly, you will see notifications in your ntfy.sh workspace.
 
 ![ntfy logo](assets/ntfy.png)
 
-If you are still having trouble, please open an issue on the [GitHub repository](https://github.com/resonatehq-examples/example-countdown-ts-gcp/issues).
+If you are still having trouble please [open an issue](https://github.com/resonatehq-examples/example-countdown-ts-gcp/issues).

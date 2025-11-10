@@ -2,17 +2,7 @@ import type { Request, Response } from "@google-cloud/functions-framework";
 import { Resonate } from "@resonatehq/gcp";
 import type { Context } from "@resonatehq/sdk";
 
-const resonate = new Resonate({ verbose: true });
-
-async function notify(_ctx: Context, url: string, msg: string) {
-	await fetch(url, {
-		method: "POST",
-		body: msg,
-		headers: {
-			"Content-Type": "text/plain",
-		},
-	});
-}
+const resonate = new Resonate();
 
 export function* countdown(
 	ctx: Context,
@@ -34,12 +24,22 @@ export function* countdown(
 	yield* ctx.run(notify, url, `Done`);
 }
 
+async function notify(_ctx: Context, url: string, msg: string) {
+	await fetch(url, {
+		method: "POST",
+		body: msg,
+		headers: {
+			"Content-Type": "text/plain",
+		},
+	});
+}
+
 resonate.register("countdown", countdown);
 
 export const handler = async (req: Request, res: Response) => {
-	const now = Date.now();
+	const start = Date.now();
 	res.on("finish", () => {
-		console.log(`Execution '${req.body.task.id}': ${Date.now() - now}ms`);
+		console.log(`Execution '${req.body.task.id}': ${Date.now() - start}ms`);
 	});
 	return resonate.handlerHttp()(req, res);
 };
