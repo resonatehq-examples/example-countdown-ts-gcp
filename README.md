@@ -4,7 +4,7 @@ A Countdown powered by Resonate and Google Cloud Functions. The Countdown, sends
 
 ## How It Works
 
-TODO
+This example demonstrates how Resonate's programming model enables our users to write dead simple code, that runs on serverless runtime.
 
 ```typescript
 export function* countdown(
@@ -23,6 +23,9 @@ export function* countdown(
 	yield* ctx.run(notify, url, `Done`);
 }
 ```
+
+**Key Concepts:**
+- **Suspension:** Executions can be paused for given number of time via `ctx.sleep`
 
 ---
 
