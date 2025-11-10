@@ -19,6 +19,10 @@ export function* countdown(
 	delay: number,
 	url: string,
 ) {
+	yield* ctx.run(() => {
+		console.log(`Countdown ${ctx.id}: ${url}`);
+	});
+
 	for (let i = count; i > 0; i--) {
 		// send notification to ntfy.sh
 		yield* ctx.run(notify, url, `Countdown: ${i}`);
