@@ -52,13 +52,13 @@ cd example-countdown-ts-gcp
 npm install
 ```
 
-### 3. Setup the Google Cloud Function locally
+### 4. Setup the Google Cloud Function locally
 
 ```
 npm run build && npm run dev
 ```
 
-### 4. Start the function execution
+### 5. Start the function execution
 
 ```
 resonate invoke <promiseId> --func countdown --arg 5 --arg 1 --arg https://ntfy.sh/<workspace> --target <functionUrl>
