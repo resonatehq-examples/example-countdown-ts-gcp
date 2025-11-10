@@ -4,7 +4,7 @@ A Countdown powered by Resonate and Google Cloud Functions. The Countdown, sends
 
 ## How It Works
 
-This example demonstrates how Resonate's programming model enables our users to write dead simple code, that runs on serverless runtime.
+This example demonstrates how a countdown can be implemented with Resonate's Distributed Async/Await using a naive for loop. On `yield ctx.sleep` the countdown function suspends, immediatelly completing the Google Cloud Function execution. After the specified sleep duration, Resonate will resume the countdown function by starting a new Google Cloud Function execution.
 
 ```typescript
 export function* countdown(
@@ -16,7 +16,8 @@ export function* countdown(
 	for (let i = count; i > 0; i--) {
 		// send notification to ntfy.sh
 		yield* ctx.run(notify, url, `Countdown: ${i}`);
-		// sleep
+		// sleep results in a suspension point causing
+		// the Google Cloud Function execution to terminate
 		yield* ctx.sleep(delay * 60 * 1000);
 	}
 	// send the last notification to ntfy.sh
@@ -52,13 +53,13 @@ cd example-countdown-ts-gcp
 npm install
 ```
 
-### 4. Setup the Google Cloud Function locally
+### 4. Run the Google Cloud Function locally
 
 ```
-npm run build && npm run dev
+npm run dev
 ```
 
-### 5. Start the function execution
+### 5. Invoke the countdown function
 
 ```
 resonate invoke <promiseId> --func countdown --arg 5 --arg 1 --arg https://ntfy.sh/<workspace> --target <functionUrl>
@@ -67,7 +68,19 @@ resonate invoke <promiseId> --func countdown --arg 5 --arg 1 --arg https://ntfy.
 Example
 
 ```
-resonate invoke foo.1 --func countdown --arg 5 --arg 0.5 --arg https://ntfy.sh/resonatehq --target http://localhost:8080/
+resonate invoke foo.1 --func countdown --arg 5 --arg 1 --arg https://ntfy.sh/resonatehq-$RANDOM --target http://localhost:8080
+```
+
+### 5. Visit the url printed
+
+```
+Countdown <promiseId>: https://ntfy.sh/resonatehq-<number>
+```
+
+Example
+
+```
+Countdown foo.1: https://ntfy.sh/resonatehq-22012
 ```
 
 ## Troubleshooting
@@ -77,7 +90,3 @@ If everything is configured correctly, you will see notifications poping up at t
 ![ntfy logo](assets/ntfy.png)
 
 If you are still having trouble, please open an issue on the [GitHub repository](https://github.com/resonatehq-examples/example-countdown-ts-gcp/issues).
-
-## GCP Deployment
-
-TODO...

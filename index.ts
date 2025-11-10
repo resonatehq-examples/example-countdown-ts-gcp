@@ -1,3 +1,4 @@
+import type { Request, Response } from "@google-cloud/functions-framework";
 import { Resonate } from "@resonatehq/gcp";
 import type { Context } from "@resonatehq/sdk";
 
@@ -35,4 +36,11 @@ export function* countdown(
 
 resonate.register("countdown", countdown);
 
-export const handler = resonate.handlerHttp();
+export const handler = async (req: Request, res: Response) => {
+	console.log();
+	const now = Date.now();
+	res.on("finish", () => {
+		console.log(`Execution '${req.body.task.id}': ${Date.now() - now}ms`);
+	});
+	return resonate.handlerHttp()(req, res);
+};
