@@ -37,7 +37,6 @@ export function* countdown(
 resonate.register("countdown", countdown);
 
 export const handler = async (req: Request, res: Response) => {
-	console.log();
 	const now = Date.now();
 	res.on("finish", () => {
 		console.log(`Execution '${req.body.task.id}': ${Date.now() - now}ms`);
