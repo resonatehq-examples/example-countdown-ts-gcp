@@ -1,3 +1,4 @@
+import type { Request, Response } from "@google-cloud/functions-framework";
 import { Resonate } from "@resonatehq/gcp";
 import type { Context } from "@resonatehq/sdk";
 
@@ -19,6 +20,10 @@ export function* countdown(
 	delay: number,
 	url: string,
 ) {
+	yield* ctx.run(() => {
+		console.log(`Countdown ${ctx.id}: ${url}`);
+	});
+
 	for (let i = count; i > 0; i--) {
 		// send notification to ntfy.sh
 		yield* ctx.run(notify, url, `Countdown: ${i}`);
@@ -31,4 +36,10 @@ export function* countdown(
 
 resonate.register("countdown", countdown);
 
-export const handler = resonate.handlerHttp();
+export const handler = async (req: Request, res: Response) => {
+	const now = Date.now();
+	res.on("finish", () => {
+		console.log(`Execution '${req.body.task.id}': ${Date.now() - now}ms`);
+	});
+	return resonate.handlerHttp()(req, res);
+};

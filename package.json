@@ -8,12 +8,15 @@
 		"build": "tsc",
 		"start": "node dist/index.js",
 		"check": "npx @biomejs/biome check",
-		"fmt": "npx @biomejs/biome check --write"
+		"fmt": "npx @biomejs/biome check --write",
+		"dev": "npm run build && npx functions-framework --target=handler --port=8080 --source=dist/index.js",
+		"type-check": "npx tsc --noEmit"
 	},
 	"dependencies": {
-		"@resonatehq/gcp": "^0.1.4"
+		"@resonatehq/gcp": "^0.1.5"
 	},
 	"devDependencies": {
+		"@google-cloud/functions-framework": "^4.0.0",
 		"typescript": "^5.9.3"
 	}
 }
