@@ -140,3 +140,4 @@ vite.config.ts.timestamp-*
 
 function.js
 *.lock
+package-lock.json
