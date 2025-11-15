@@ -28,6 +28,10 @@ export function* countdown(
 **Key Concepts:**
 
 - **Suspension and Resumption:** Executions can be suspended for any amount of time
+- **Stateful executions on stateless infrastructure:** Short-lived function instances executing one step of a long-lived execution coordinated by the Resonate Server.
+
+![Deep Research Agent Demo](doc/mechanics.jpg)
+
 ---
 
 # Running the Example
