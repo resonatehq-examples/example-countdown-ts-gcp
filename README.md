@@ -2,6 +2,8 @@
 
 A *Countdown* powered by the Resonate Typescript SDK and Google Cloud Functions. The countdown sends periodic notifications to [ntfy.sh](https://ntfy.sh/) at configurable intervals.
 
+![Countdown Workflow](doc/countdown.jpg)
+
 ## Behind the Scenes
 
 The Countdown is implemented with Resonate's Durable Execution framework, Distributed Async Await. The Countdown is a simple loop that can sleep for hours, days, or weeks. On `yield ctx.sleep` the countdown function suspends (terminates), immediately completing the Google Cloud Function execution. After the specified delay, Resonate will resume (restart) the countdown function by triggering a new Google Cloud Function execution.
