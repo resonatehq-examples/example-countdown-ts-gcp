@@ -2,7 +2,9 @@
 
 A *Countdown* powered by the Resonate Typescript SDK and Google Cloud Functions. The countdown sends periodic notifications to [ntfy.sh](https://ntfy.sh/) at configurable intervals.
 
-![Countdown Workflow](doc/countdown.jpg)
+<div align="center">
+  <img src="doc/countdown.jpg" alt="Countdown Workflow">
+</div>
 
 ## Behind the Scenes
 
@@ -32,7 +34,9 @@ export function* countdown(
 - **Suspension and Resumption:** Executions can be suspended for any amount of time
 - **Stateful executions on stateless infrastructure:** Short-lived function instances executing one step of a long-lived execution coordinated by the Resonate Server.
 
-![Deep Research Agent Demo](doc/mechanics.jpg)
+<div align="center">
+  <img src="doc/mechanics.jpg" alt="Mechanics">
+</div>
 
 ---
 
@@ -269,6 +273,8 @@ gcloud run services delete resonate-server --region=us-central1 --quiet
 
 If everything is configured correctly, you will see notifications in your ntfy.sh workspace.
 
-![ntfy logo](doc/ntfy.png)
+<div align="center">
+  <img src="doc/ntfy.png" alt="ntfy logo">
+</div>
 
 If you are still having trouble please [open an issue](https://github.com/resonatehq-examples/example-countdown-ts-gcp/issues).
